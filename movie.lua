@@ -13,46 +13,51 @@ end
 term.clear()
 local it = iterator()
 
-local bFinished = false
-while not bFinished do
-	-- Read the frame header
-	local holdLine = it()
-	if not holdLine then
-		bFinished = true
-		break
-	end
+local on = redstone.getAnalogInput("back")
 
-	-- Monitor an der Oberseite anschließen
-local mon = peripheral.wrap("top")
-mon.setTextScale(0.5) -- kleinere Schrift, passt mehr auf den Screen
-mon.setBackgroundColor(colors.black)
-mon.setTextColor(colors.white)
+while on do
 
-while true do
-    -- Monitorgröße abrufen
-    local w, h = mon.getSize()
-    local startX = math.floor((w - 65) / 2)
-    local startY = math.floor((h - 14) / 2)
-
-    -- Bildschirm leeren
-    mon.clear()
-
-    -- 13 Zeilen ausgeben
-    for n = 1, 13 do
-        local line = it() -- deine Frame-Funktion
-        if line then
-            mon.setCursorPos(startX, startY + n)
-            mon.write(line)
-        else
+    local bFinished = false
+    while not bFinished do
+        -- Read the frame header
+        local holdLine = it()
+        if not holdLine then
             bFinished = true
             break
         end
+
+        -- Monitor an der Oberseite anschließen
+    local mon = peripheral.wrap("top")
+    mon.setTextScale(0.5)
+    mon.setBackgroundColor(colors.black)
+    mon.setTextColor(colors.white)
+
+    while true do
+        -- Monitorgröße abrufen
+        local w, h = mon.getSize()
+        local startX = math.floor((w - 65) / 2)
+        local startY = math.floor((h - 14) / 2)
+
+        -- Bildschirm leeren
+        --mon.clear()
+
+        -- 13 Zeilen ausgeben
+        for n = 1, 13 do
+            local line = it() -- deine Frame-Funktion
+            if line then
+                mon.setCursorPos(startX, startY + n)
+                mon.write(line)
+            else
+                bFinished = true
+                break
+            end
+        end
+
+
+        -- Hold the frame
+        local hold = tonumber(holdLine) or 1
+        local delay = (hold * 0.05) - 0.01
+        sleep( delay )
     end
 
-end
-
-	-- Hold the frame
-	local hold = tonumber(holdLine) or 1
-	local delay = (hold * 0.05) - 0.01
-	sleep( delay )
 end
