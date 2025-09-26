@@ -14,8 +14,9 @@ term.clear()
 local it = iterator()
 
 local on = redstone.getAnalogInput("back")
+local mon = peripheral.wrap("top")
 
-while on do
+--while on do
 
     local bFinished = false
     while not bFinished do
@@ -27,8 +28,7 @@ while on do
         end
 
         -- Monitor an der Oberseite anschließen
-    local mon = peripheral.wrap("top")
-    mon.setTextScale(2)
+    mon.setTextScale(1)
     mon.setBackgroundColor(colors.black)
     mon.setTextColor(colors.white)
 
@@ -61,4 +61,4 @@ while on do
     end
 
 end
-end
+--end
