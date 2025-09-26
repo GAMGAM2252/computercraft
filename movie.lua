@@ -28,7 +28,7 @@ while on do
 
         -- Monitor an der Oberseite anschließen
     local mon = peripheral.wrap("top")
-    mon.setTextScale(0.5)
+    mon.setTextScale(2)
     mon.setBackgroundColor(colors.black)
     mon.setTextColor(colors.white)
 
