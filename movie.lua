@@ -39,7 +39,7 @@ while on do
         local startY = math.floor((h - 14) / 2)
 
         -- Bildschirm leeren
-        --mon.clear()
+        mon.clear()
 
         -- 13 Zeilen ausgeben
         for n = 1, 13 do
